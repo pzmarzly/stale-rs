@@ -1,0 +1,30 @@
+#!/bin/bash
+# https://github.com/pzmarzly/stale-rs
+# Licensed MIT
+
+echo "cargo check-ing..."
+cargo check --all-targets -q
+OUT=$?
+if [ $OUT -ne 0 ]; then
+    echo "Make your project compile first!"
+    exit 1
+fi
+
+STALE_FILES=""
+FILES=$(fd -e rs)
+for FILE in $FILES
+do
+    echo Checking "$FILE"
+    mv "$FILE" "$FILE.hiding"
+    cargo check --all-targets >/dev/null 2>&1
+    OUT=$?
+    if [ $OUT -eq 0 ]; then
+        echo Stale: "$FILE" 1>&2
+        STALE_FILES="${STALE_FILES}
+    ${FILE}"
+    fi
+    mv "$FILE.hiding" "$FILE"
+done
+echo ""
+echo "Stale files (safe to remove):"
+echo "$STALE_FILES"

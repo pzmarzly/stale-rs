@@ -4,6 +4,9 @@ This script will find .rs files that are safe to delete (they are not mentioned 
 
 ![GIF demo](demo.gif)
 
+If you instead want something that works on per-function level, see
+[warnalyzer](https://crates.io/crates/warnalyzer).
+
 ## Requirements
 
 - cargo

@@ -22,3 +22,7 @@ False positives may happen if a file is used only when certain feature flag is t
 The script works by renaming files and checking if `cargo check --all-targets` still work.
 If you pause the script or it crashes, you may find `.rs.hiding` files. Remove the `.hiding`
 extension to recover.
+
+## Other info
+
+Codebase shown on the GIF demo is [`freedomlayer/offst`](https://github.com/freedomlayer/offst).
